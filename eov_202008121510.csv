@@ -1,0 +1,42 @@
+"","","","","tmarkey@ecosystems.us","nleuth@ecosystems.us","","nleuth@ecosystems.us","",
+"id","label","description","statement","effectiveness","effectiveness","importance","effectiveness","importance",
+"table-stakes","Table Stakes","Addresses absolute requirements for initial consideration","Provides products or services that meet my organization’s internal specifications",6,5,7,9,8
+"table-stakes","Table Stakes","Addresses absolute requirements for initial consideration","Helps my organization comply with external regulations",7,4,4,10,10
+"table-stakes","Table Stakes","Addresses absolute requirements for initial consideration","Provides products or services at an acceptable price",7,10,3,10,9
+"table-stakes","Table Stakes","Addresses absolute requirements for initial consideration","Is ethical in all their activities",10,6,9,10,10
+"economic","Economic","Improves financial success","Reduces cost for my organization",5,3,8,10,10
+"economic","Economic","Improves financial success","Helps my organization increase revenue",7,7,10,9,7
+"performance","Performance","Increases the quality of products and services","Provides my organization with high quality products or services",4,5,5,10,8
+"performance","Performance","Increases the quality of products and services","Expands easily to additional demand, processes, or tasks",7,6,7,10,9
+"performance","Performance","Increases the quality of products and services","Provides my organization with innovative capabilities",9,4,5,9,7
+"operational","Operational","Advances business operations","Helps my organization integrate different facets of our business",7,4,3,8,9
+"operational","Operational","Advances business operations","Reduces complexity and keeps things simple for my organization",9,4,5,10,10
+"operational","Operational","Advances business operations","Helps my organization to be more organized",10,6,7,9,8
+"operational","Operational","Advances business operations","Helps my organization connect with others internally and externally",10,4,7,9,9
+"strategic","Strategic","Enhances my firm's strategic position","Goes above and beyond standard products or services (e.g. allows customized products or services)",10,9,2,8,7
+"strategic","Strategic","Enhances my firm's strategic position","Improves the quality or perceived value of my organization's products or services",8,4,4,9,8
+"strategic","Strategic","Enhances my firm's strategic position","Protects my organization against loss or unnecessary risk",10,5,5,10,10
+"strategic","Strategic","Enhances my firm's strategic position","Allows my organization to operate across more segments or geographies",8,7,8,10,10
+"access","Access","Improves optionality and availability","Provides a variety of products or services to choose from",7,3,3,8,9
+"access","Access","Improves optionality and availability","Is available when needed, where needed",10,4,6,7,8
+"access","Access","Improves optionality and availability","Offers products or services that can be easily configured to the needs of my organization",9,4,4,9,9
+"productivity","Productivity","Increases efficiency and information throughout my organization","Helps my organization get things done with less effort",9,10,10,10,10
+"productivity","Productivity","Increases efficiency and information throughout my organization","Helps my organization avoid hassles",9,10,10,10,10
+"productivity","Productivity","Increases efficiency and information throughout my organization","Saves time for my organization (e.g. improves time to value)",9,10,10,10,10
+"productivity","Productivity","Increases efficiency and information throughout my organization","Helps my organization feel knowledgeable and informed",8,10,10,9,7
+"productivity","Productivity","Increases efficiency and information throughout my organization","Provides transparency to my organization",9,4,10,9,9
+"relationship","Relationship","Builds the vendor-customer relationship","Is an expert in the products or services it provides to my organization",10,10,10,10,10
+"relationship","Relationship","Builds the vendor-customer relationship","Is committed to the success of my organization",7,10,10,10,9
+"relationship","Relationship","Builds the vendor-customer relationship","Responds promptly and professionally to my organization's needs",8,10,10,10,9
+"relationship","Relationship","Builds the vendor-customer relationship","Fits well with my organization's culture and people",8,10,10,9,9
+"relationship","Relationship","Builds the vendor-customer relationship","Is a stable company for the foreseeable future",10,8,10,10,10
+"personal","Personal","Delivers personal benefits to me","Helps me and my colleagues to grow and develop personally",8,6,9,9,9
+"personal","Personal","Delivers personal benefits to me","Is personally enjoyable to work with or otherwise rewarding",10,9,8,9,9
+"personal","Personal","Delivers personal benefits to me","Helps me worry less and feel more secure",10,6,6,9,9
+"personal","Personal","Delivers personal benefits to me","Provides aesthetically pleasing products or services",8,5,8,8,8
+"career","Career","Enhances my career prospects","Does not jeopardize and may enhance my reputation in the workplace",7,5,6,9,9
+"career","Career","Enhances my career prospects","Makes me or my colleagues more marketable as professionals (e.g. improves my resume or my colleagues' resumes)",6,5,5,9,9
+"career","Career","Enhances my career prospects","Helps me expand my personal or professional network",9,8,6,9,9
+"purpose","Purpose","Provides a higher purpose","Helps my organization be more socially responsible",10,8,10,10,8
+"purpose","Purpose","Provides a higher purpose","Helps my organization anticipate where our markets are going",9,10,9,9,8
+"purpose","Purpose","Provides a higher purpose","Gives me hope for the future of my organization",8,6,10,9,9
