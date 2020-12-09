@@ -75,19 +75,46 @@ def list_of_buckets():
 def get_json_from_bucket(bucket_name):
     json_list = []
     global conn
-    for key in conn.list_objects(Bucket=bucket_name)['Contents']:
-        if key['Key'].endswith(".json"):
-            json_list.append(key['Key'])
-    return json_list
+    if isinstance(bucket_name, str):
+        for key in conn.list_objects(Bucket=bucket_name)['Contents']:
+            if key['Key'].endswith(".json"):
+                json_list.append([key['Key'], bucket])
+        return json_list
+    elif isinstance(bucket_name, list):
+        for bucket in bucket_name:
+            for key in conn.list_objects(Bucket=bucket)['Contents']:
+                if key['Key'].endswith(".json"):
+                    json_list.append([key['Key'], bucket])
+            return json_list
+
+def make_json_list(key_list):
+    global conn
+    ret = []
+    for key in key_list:
+        content = conn.get_object(Bucket=key[1], Key=key[0])['Body'].read()
+        content = content.decode("utf-8")
+        content = json.loads(content)
+        ret.append(content)
+        print(type(content))
+    return ret
+
+
+def make_csv(dict_list):
+    ret = ""
+    return ret
 
 
 if __name__ == "__main__":
     dict = {}
     buckets = list_of_buckets()
     json_objs = []
-    for bucket in buckets:
-        jsons = get_json_from_bucket(bucket)
-        json_objs += jsons
+    # for bucket in buckets:
+    #     jsons = get_json_from_bucket(bucket)
+    #     json_objs += jsons
+    json_objs = get_json_from_bucket(buckets)
+    all_dicts = make_json_list(json_objs)
+    # for dict in all_dicts:
+    #     print(dict)
     # test = io.StringIO()
     # test = conn.get_object(Bucket=bucket, Key=json_objs[0])
     # test['Body'].read()
