@@ -65,6 +65,11 @@ def get_buckets():
 
 
 def list_of_buckets():
+    """
+    Gets a list of buckets in your AWS account
+
+    :return: List of just names of the buckets
+    """
     buckets = get_buckets()
     ret = []
     for b in buckets:
@@ -73,6 +78,17 @@ def list_of_buckets():
 
 
 def get_json_from_bucket(bucket_name):
+    """
+    From each bucket, gets every file key that ends with '.json'
+
+    Files with keys that are not their filename could be left out of this
+
+    Args:
+        bucket_name (str or list): If it's a string, it evaluates it as a single
+                                   bucket.  If it's a list, it evaluates it as
+                                   multiple buckets
+    :return: List of JSON files in the selected buckets
+    """
     json_list = []
     global conn
     if isinstance(bucket_name, str):
@@ -88,6 +104,17 @@ def get_json_from_bucket(bucket_name):
             return json_list
 
 def make_json_list(key_list):
+    """
+    Makes a list of dictionaries from the JSON files
+
+    From a given bucket, retrieves a given JSON file as a string, then converts
+    it into a dictionary and adds it to a list.
+
+    Args:
+        key_list (list): List of keys of JSON files, along with their buckets
+
+    :return: List of dictionaries
+    """
     global conn
     ret = []
     for key in key_list:
@@ -99,6 +126,17 @@ def make_json_list(key_list):
 
 
 def make_csv(dict_list):
+    """
+    Creates a CSV from a list of dictionaries
+
+    For each value statement, specify the id, label, description, statement,
+    and, for each dictionary, the effectiveness and possibly importance scores.
+
+    Args:
+        dict_list (list): List of dictionaries, retrieved from AWS
+
+    :return: String of the content of the CSV
+    """
     ret = " , , , "
     for dict in dict_list:
         if dict["includeImportance"] is True:
@@ -120,11 +158,23 @@ def make_csv(dict_list):
             ret += san_inputs(statement["statement"])
             ret += find_vals(dict_list, block["id"], statement["statement"])
             ret += "\n"
-    print(ret)
     return ret
 
 
 def find_vals(dict_list, block, statement):
+    """
+    Finds the values for a statement
+
+    The statement is in every JSON file, it can either have an effectiveness
+    score or both an effectiveness and an importance score.
+
+    Args:
+    dict_list (list): List of dictionaries, retrieved from AWS
+    block (String): String of which block the statement belongs to
+    statement (String): The statement
+
+    :return: The effectiveness and importance of the given statement
+    """
     ret = ","
     imp = []
     for dict in dict_list:
@@ -144,6 +194,18 @@ def find_vals(dict_list, block, statement):
 
 
 def san_inputs(statement):
+    """
+    Makes the statement easier to read in a CSV
+
+    Adds quotation marks around a statement so that if there is a character,
+    such as a comma, the CSV won't read that as a new entry.  This is only
+    important for reading CSV files in programs like Excel.
+
+    Args:
+        statement (String): The value statement
+
+    :return: The value statement with quotation marks
+    """
     statement = "\"" + statement + "\""
     return statement
 
@@ -155,4 +217,3 @@ if __name__ == "__main__":
     json_objs = get_json_from_bucket(buckets)
     all_dicts = make_json_list(json_objs)
     ret = make_csv(all_dicts)
-    # find_vals(all_dicts, "purpose", "Helps my organization be more socially responsible")
