@@ -95,26 +95,64 @@ def make_json_list(key_list):
         content = content.decode("utf-8")
         content = json.loads(content)
         ret.append(content)
-        print(type(content))
     return ret
 
 
 def make_csv(dict_list):
-    ret = ""
+    ret = " , , , "
+    for dict in dict_list:
+        if dict["includeImportance"] is True:
+            ret += "," + dict["email"] + ","
+        else:
+            ret += "," + dict["email"]
+    ret += "\n"
+    ret += "id,label,description,statement"
+    for dict in dict_list:
+        if dict["includeImportance"] is True:
+            ret += ",effectiveness,importance"
+        else:
+            ret += ",effectiveness"
+    ret += "\n"
+    for block in dict_list[0]["valueBlocks"]:
+        for statement in block["valueStatements"]:
+            ret += block["id"] + "," + block["label"] + ","
+            ret += block["description"] + ","
+            ret += san_inputs(statement["statement"])
+            ret += find_vals(dict_list, block["id"], statement["statement"])
+            ret += "\n"
+    print(ret)
     return ret
+
+
+def find_vals(dict_list, block, statement):
+    ret = ","
+    imp = []
+    for dict in dict_list:
+        imp.append(dict["includeImportance"])
+    for i, dict in enumerate(dict_list):
+        for the_block in dict["valueBlocks"]:
+            if the_block["id"] == block:
+                for the_statement in the_block["valueStatements"]:
+                    if the_statement["statement"] == statement:
+                        if imp[i] == True:
+                            ret += str(the_statement["effectiveness"]) + ","
+                            ret += str(the_statement["importance"]) + ","
+                        else:
+                            ret += str(the_statement["effectiveness"]) + ","
+    ret = ret[0:len(ret)-1]
+    return ret
+
+
+def san_inputs(statement):
+    statement = "\"" + statement + "\""
+    return statement
 
 
 if __name__ == "__main__":
     dict = {}
     buckets = list_of_buckets()
     json_objs = []
-    # for bucket in buckets:
-    #     jsons = get_json_from_bucket(bucket)
-    #     json_objs += jsons
     json_objs = get_json_from_bucket(buckets)
     all_dicts = make_json_list(json_objs)
-    # for dict in all_dicts:
-    #     print(dict)
-    # test = io.StringIO()
-    # test = conn.get_object(Bucket=bucket, Key=json_objs[0])
-    # test['Body'].read()
+    ret = make_csv(all_dicts)
+    # find_vals(all_dicts, "purpose", "Helps my organization be more socially responsible")
