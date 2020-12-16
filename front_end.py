@@ -16,13 +16,19 @@ def design_window():
             str_to_save = "[default]\n"
             str_to_save += "aws_access_key_id=" + aki_var.get() + "\n"
             str_to_save += "aws_secret_access_key=" + sak_var.get() + "\n"
-
+            if os == "Windows":
+                file = open(r"C:\Users\{}\.aws\credentials".format(user), "w")
+                file.write(str_to_save)
+                file.close()
+            else:
+                file = open(r"/Users/{}/.aws/credentials".format(user), "w")
+                file.write(str_to_save)
+                file.close()
             return
+
         cred_win = tk.Tk()
-        if os == "Windows":
-            hello
-        et = "In order to access AWS servers, you have to create a credentials "
-        et += "file at the file address {}.  If you fill out the fields in "
+        et = "In order to access AWS servers, you have to create a credentials"
+        et += " file at the file address {}.  If you fill out the fields in "
         et += "this window, then the file will be created by this program.  "
         et += "Information on how to find the required information can be "
         et += "found at: "
