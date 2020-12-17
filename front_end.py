@@ -196,5 +196,17 @@ def design_window():
     return
 
 
+def check_json_format(dict_list):
+    for dict in dict_list:
+        try:
+            dict["email"]
+            dict["includeImportance"]
+            dict["template"]
+            dict["valueBlocks"]
+        except KeyError:
+            dict_list.remove(dict)
+    return dict_list
+
+
 if __name__ == "__main__":
     design_window()
