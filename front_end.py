@@ -58,10 +58,8 @@ def design_window():
                                  command=savefile)
         mk_file_btn.grid(row=3, column=1)
         return
+
     def check_credentials():
-        # [default]
-        # aws_access_key_id=
-        # aws_secret_access_key=
         os = platform.system()
         user = getpass.getuser()
         if os == "Windows":
@@ -79,6 +77,7 @@ def design_window():
             else:
                 return
         return
+
     def find_bucket_json():
         global file_list
         selections = buckets_sel.curselection()
@@ -92,11 +91,13 @@ def design_window():
             file_list = rnw.get_json_from_bucket(sel_bucket_list)
             files.set(value=file_list)
         return
+
     def all_bucket_json():
         global file_list
         file_list = rnw.get_json_from_bucket(bucket_list)
         files.set(value=file_list)
         return
+
     def convert_sel():
         global file_list
         csv_str.set(value="")
@@ -106,31 +107,38 @@ def design_window():
             sel_file_list.append(file_list[choice])
         if len(sel_file_list) > 0:
             dicts = rnw.make_json_list(sel_file_list)
+            dicts = check_json_format(dicts)
             csv_str.set(value=rnw.make_csv(dicts))
         return
+
     def convert_all():
         global file_list
         csv_str.set(value="")
         if len(file_list) > 0:
             dicts = rnw.make_json_list(file_list)
+            dicts = check_json_format(dicts)
             csv_str.set(value=rnw.make_csv(dicts))
         return
+
     def preview_csv():
-        def close():
+
+        def prev_close():
             preview_window.destroy()
         preview_window = tk.Tk()
         xscrollbar = tk.Scrollbar(preview_window)
         yscrollbar = tk.Scrollbar(preview_window)
         csv = tk.Message(preview_window, text=csv_str.get())
         csv.grid(row=0, column=0, sticky="w")
-        close_btn = ttk.Button(preview_window, text="Close",
-                               command=close)
-        close_btn.grid(row=1, column=0)
+        prev_close_btn = ttk.Button(preview_window, text="Close",
+                                    command=prev_close)
+        prev_close_btn.grid(row=1, column=0)
+
     def save_csv():
         file = tk.filedialog.asksaveasfile(mode="w", defaultextension=".csv")
         file.write(csv_str.get())
         file.close()
         return
+
     def close():
         root.destroy()
 
@@ -194,6 +202,18 @@ def design_window():
     check_credentials()
     root.mainloop()
     return
+
+
+def check_json_format(dict_list):
+    for dict in dict_list:
+        try:
+            dict["email"]
+            dict["includeImportance"]
+            dict["template"]
+            dict["valueBlocks"]
+        except KeyError:
+            dict_list.remove(dict)
+    return dict_list
 
 
 if __name__ == "__main__":
